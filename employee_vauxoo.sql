@@ -4,12 +4,40 @@
 --       Consider add ';' at end sentence.
 
 CREATE TABLE employee (
+    id SERIAL NOT NULL,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE employee_department (
+    id SERIAL NOT NULL,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE employee_hobby (
-);
+ALTER TABLE employee ADD COLUMN department_id INTEGER;
+
+ALTER TABLE employee ADD CONSTRAINT fk_department_has_employees
+FOREIGN KEY (department_id)
+REFERENCES employee_department (id);
+
+INSERT INTO employee_department (name, description) VALUES
+    ('department1', 'description1'),
+    ('department2', 'description2'),
+    ('department3', 'description3'),
+    ('department4', 'description4'),
+    ('department5', 'description5'),
+    ('department6', 'description6');
+
+INSERT INTO employee (first_name, last_name, department_id) VALUES
+    ('employee1', 'last_name1', 1),
+    ('employee2', 'last_name2', 2),
+    ('employee3', 'last_name3', 3),
+    ('employee4', 'last_name4', 4);
+
+--CREATE TABLE employee_hobby (
+--);
 
 -- ...
