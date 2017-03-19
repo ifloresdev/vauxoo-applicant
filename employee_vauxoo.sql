@@ -60,3 +60,12 @@ INSERT INTO employee_practices (employee_id, hobby_id) VALUES
     (2, 2), (2, 3),
     (3, 3), (3, 1),
     (4, 1), (4, 2);
+
+ALTER TABLE employee ADD COLUMN boss_id INTEGER;
+
+ALTER TABLE employee ADD CONSTRAINT fk_boss_has_employees
+FOREIGN KEY (boss_id)
+REFERENCES employee (id);
+
+UPDATE employee SET boss_id = 1;
+--
