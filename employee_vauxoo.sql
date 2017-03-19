@@ -37,7 +37,26 @@ INSERT INTO employee (first_name, last_name, department_id) VALUES
     ('employee3', 'last_name3', 3),
     ('employee4', 'last_name4', 4);
 
---CREATE TABLE employee_hobby (
---);
+CREATE TABLE employee_hobby (
+    id SERIAL NOT NULL,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    PRIMARY KEY (id)
+);
 
--- ...
+CREATE TABLE employee_practices (
+    employee_id INTEGER REFERENCES employee (id) NOT NULL,
+    hobby_id INTEGER REFERENCES employee_hobby (id) NOT NULL,
+    PRIMARY KEY (employee_id, hobby_id)
+);
+
+INSERT INTO employee_hobby (name, description) VALUES
+    ('hobby1', 'hobby_description1'),
+    ('hobby2', 'hobby_description2'),
+    ('hobby3', 'hobby_description3');
+
+INSERT INTO employee_practices (employee_id, hobby_id) VALUES
+    (1, 1), (1, 2),
+    (2, 2), (2, 3),
+    (3, 3), (3, 1),
+    (4, 1), (4, 2);
